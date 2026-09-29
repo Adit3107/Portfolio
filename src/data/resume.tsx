@@ -20,7 +20,7 @@ export const DATA = {
   description:
     "Computer Engineering student and full-stack developer building AI-powered, distributed, and data-intensive products.",
   summary:
-    "I am a Computer Engineering student at [Pune Institute of Computer Technology](#education) with a CGPA of 9.04/10. I build full-stack systems across [AI workflows](#projects), backend services, and modern web apps, with hands-on experience in Go, Next.js, PostgreSQL, AWS S3, Kafka, Redis, Docker, and Python. Recently, I worked as a [Full Stack Developer at Prime Vacations](#work), where I built AI-assisted travel query resolution, automated scraping pipelines, and responsive package-building workflows.",
+    "I am a Computer Engineering student at [Pune Institute of Computer Technology](#education) with a CGPA of 9.04/10. I build full-stack systems across [AI workflows](#projects), backend services, and modern web apps, with hands-on experience in Go, Node.js, PostgreSQL, AWS, Kafka, Redis, Docker, and Python. Recently, I worked as a [Full Stack Developer at Prime Vacations](#work), where I built AI-assisted travel query resolution, automated scraping pipelines, and responsive package-building workflows.",
   avatarUrl: "/profile.png",
   achievements: [
     {
@@ -152,27 +152,24 @@ export const DATA = {
     },
     {
       title: "OutlierX",
-      href: "https://github.com/Adit3107",
+      href: "https://github.com/Adit3107/OutlierX",
       dates: "2026",
       active: true,
       description:
-        "Fake transaction detection platform with a 7-service event-driven microservices architecture, Nginx API gateway, async CSV ingestion using BullMQ, Apache Kafka streaming, and a Python FastAPI ML service using Isolation Forest plus rule-based detection. Added Redis behavioral profiling, real-time SSE dashboards, Twilio alerts, Razorpay payments, JWT, Google OAuth, OTP verification, and Docker Compose deployment.",
+        "Multi-tenant financial anomaly detection SaaS with organization-based access control, transaction CSV ingestion, investigation tools, explainable rule scoring, Isolation Forest predictions, and combined risk decisions. Includes analytics, alert management, API keys, audit activity, and ML model monitoring.",
       technologies: [
-        "Node.js",
+        "Next.js",
+        "TypeScript",
         "Express",
-        "Kafka",
-        "Redis",
-        "BullMQ",
         "PostgreSQL",
-        "Docker",
-        "Prisma",
-        "Python",
+        "Clerk",
         "FastAPI",
+        "Isolation Forest",
       ],
       links: [
         {
           type: "Source",
-          href: "https://github.com/Adit3107",
+          href: "https://github.com/Adit3107/OutlierX",
           icon: <Icons.github className="size-3" />,
         },
       ],
@@ -185,8 +182,8 @@ export const DATA = {
       dates: "2026",
       active: true,
       description:
-        "An AI-powered coding assistant designed to help developers work through code tasks.",
-      technologies: ["AI", "Developer Tools"],
+        "Connect GitHub, index a repository with Jina, and ask questions answered from the codebase using retrieval-augmented generation with file and line citations.",
+      technologies: ["Spring Boot", "Next.js", "RAG", "Code Indexing", "Jina"],
       links: [
         {
           type: "Source",
@@ -198,17 +195,27 @@ export const DATA = {
       video: "",
     },
     {
-      title: "Flowmind",
-      href: "https://github.com/Adit3107",
+      title: "FlowMind",
+      href: "https://github.com/Adit3107/FlowMind",
       dates: "2026",
       active: true,
       description:
-        "A workflow-focused project for organizing ideas and turning them into structured processes.",
-      technologies: ["Workflow", "Productivity"],
+        "An AI-powered collaborative workspace for notes, tasks, whiteboards, and team collaboration, with shared pages and real-time editing.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Clerk",
+        "Neon PostgreSQL",
+        "Drizzle ORM",
+        "Liveblocks",
+        "Tiptap",
+        "Excalidraw",
+        "Yjs",
+      ],
       links: [
         {
           type: "Source",
-          href: "https://github.com/Adit3107",
+          href: "https://github.com/Adit3107/FlowMind",
           icon: <Icons.github className="size-3" />,
         },
       ],
