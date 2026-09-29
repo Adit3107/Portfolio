@@ -1,15 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
+import SkillOrbit from "@/components/magicui/skill-orbit";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
-import HackathonsSection from "@/components/section/hackathons-section";
+import CoreSubjectsSection from "@/components/section/core-subjects-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Award } from "lucide-react";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -17,23 +19,23 @@ export default function Page() {
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <section id="hero">
-        <div className="mx-auto w-full max-w-2xl space-y-8">
-          <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
+        <div className="mx-auto w-full max-w-5xl rounded-2xl border bg-card/60 p-8 shadow-sm md:p-12">
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
             <div className="gap-2 flex flex-col order-2 md:order-1">
               <BlurFadeText
                 delay={BLUR_FADE_DELAY}
-                className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
+                className="text-4xl font-semibold tracking-tighter sm:text-5xl lg:text-6xl"
                 yOffset={8}
                 text={`Hi, I'm ${DATA.name.split(" ")[0]}`}
               />
               <BlurFadeText
-                className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
+                className="max-w-[700px] text-lg text-muted-foreground md:text-xl lg:text-2xl"
                 delay={BLUR_FADE_DELAY}
                 text={DATA.description}
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
-              <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
+              <Avatar className="size-32 rounded-full border shadow-lg ring-4 ring-muted md:size-44">
                 <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
                 <AvatarFallback>{DATA.initials}</AvatarFallback>
               </Avatar>
@@ -41,16 +43,52 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="about">
-        <div className="flex min-h-0 flex-col gap-y-4">
+      <section id="about" className="relative overflow-hidden">
+        <FlickeringGrid
+          className="pointer-events-none absolute inset-0 h-full w-full opacity-20"
+          squareSize={2}
+          gridGap={5}
+          flickerChance={0.08}
+          maxOpacity={0.14}
+          style={{
+            maskImage: "linear-gradient(to bottom, transparent, black 18%, black 82%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent, black 18%, black 82%, transparent)",
+          }}
+        />
+        <div className="relative flex min-h-0 flex-col gap-y-5">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <h2 className="text-xl font-bold">About</h2>
+            <div>
+              <h2 className="relative inline-block text-3xl font-black tracking-tight after:absolute after:-bottom-2 after:left-0 after:h-1 after:w-24 after:rounded-full after:bg-orange-400 sm:text-4xl">
+                About
+              </h2>
+            </div>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-              <Markdown>
-                {DATA.summary}
-              </Markdown>
+            <div className="rounded-2xl border bg-card/85 p-6 shadow-xl md:p-8">
+              <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
+                <Markdown>{DATA.summary}</Markdown>
+              </div>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {DATA.achievements.map((achievement) => (
+                  <div
+                    key={achievement.title}
+                    className="flex items-center gap-3 rounded-xl border bg-background/70 p-3"
+                  >
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-orange-200 bg-orange-50 text-orange-600 dark:border-orange-400/20 dark:bg-orange-950/30 dark:text-orange-300">
+                      <Award className="size-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold text-foreground">
+                        {achievement.title}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {achievement.result} · {achievement.year}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </BlurFade>
         </div>
@@ -114,7 +152,8 @@ export default function Page() {
         </div>
       </section>
       <section id="skills">
-        <div className="flex min-h-0 flex-col gap-y-4">
+        <div className="grid min-h-0 gap-8 md:grid-cols-[1fr_0.85fr] md:items-center">
+          <div className="flex min-h-0 flex-col gap-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
@@ -122,22 +161,24 @@ export default function Page() {
             {DATA.skills.map((skill, id) => (
               <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
                 <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
-                  {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
+                  {"icon" in skill && (
+                    <skill.icon className="size-4 rounded overflow-hidden object-contain" />
+                  )}
                   <span className="text-foreground text-sm font-medium">{skill.name}</span>
                 </div>
               </BlurFade>
             ))}
           </div>
+          </div>
+          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+            <SkillOrbit />
+          </BlurFade>
         </div>
       </section>
+      <CoreSubjectsSection />
       <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 11}>
           <ProjectsSection />
-        </BlurFade>
-      </section>
-      <section id="hackathons">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <HackathonsSection />
         </BlurFade>
       </section>
       <section id="contact">
